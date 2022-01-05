@@ -1,23 +1,23 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
+import React from "react";
+import { Query } from "react-apollo";
+import styled from "styled-components";
 
-import QuantitySelect from './quantitySelect';
-import * as queries from './queries.graphql';
+import QuantitySelect from "./quantitySelect";
+import * as queries from "./queries.graphql";
 
 const Table = styled.table`
-  margin-top: 32px;
-  margin-bottom: 32px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 `;
 
 const Tr = styled.tr`
-  > td {
-    padding-bottom: 16px;
-  }
-`
+    > td {
+        padding-bottom: 16px;
+    }
+`;
 
 const Description = styled.div`
-  font-size: 12px;
+    font-size: 12px;
 `;
 
 const PriceTd = styled.td`
@@ -33,37 +33,42 @@ const QuantityTd = styled.td`
 `;
 
 interface Product {
-  description: string;
-  name: string;
-  price: number;
-  id: string;
+    description: string;
+    name: string;
+    price: number;
+    id: string;
 }
 
 interface ProductTableProps {
-  onChangeQuantity: Function;
-  storeId: string
+    onChangeQuantity: Function;
+    storeId: string;
 }
 
 const ProductTable = React.memo(({ onChangeQuantity, storeId }: ProductTableProps) => {
-  return (
-    <Query query={queries.getStore} skip={!storeId} variables={{ id: storeId }}>
-      {({ data }) => (
-        <Table>
-          <tbody>
-            {data && data.store && data.store.products.map(({ description, id, name, price }: Product) => (
-              <Tr key={id}>
-                <td>
-                  <div>{name}</div>
-                  <Description>{description}</Description>
-                </td>
-                <PriceTd>€ {price.toFixed(2)}</PriceTd>
-              </Tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
-    </Query>
-  );
+    return (
+        <Query query={queries.getStore} skip={!storeId} variables={{ id: storeId }}>
+            {({ data }) => (
+                <Table>
+                    <tbody>
+                        {data &&
+                            data.store &&
+                            data.store.products.map(({ description, id, name, price }: Product) => (
+                                <Tr key={id}>
+                                    <td>
+                                        <div>{name}</div>
+                                        <Description>{description}</Description>
+                                    </td>
+                                    <PriceTd>€ {price.toFixed(2)}</PriceTd>
+                                    <QuantityTd>
+                                        <QuantitySelect id={id} onChange={onChangeQuantity} />
+                                    </QuantityTd>
+                                </Tr>
+                            ))}
+                    </tbody>
+                </Table>
+            )}
+        </Query>
+    );
 });
 
 export default ProductTable;

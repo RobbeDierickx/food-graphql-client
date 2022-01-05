@@ -1,19 +1,19 @@
 query getStores {
-  stores {
-    id
-    name
-  }
+    stores {
+        id
+        name
+    }
 }
 
-query getStore($id: ID) {
-  store(id: $id) {
-    id
-    name
-    products {
-      description
-      id
-      name
-      price
+query getStore($id: String) {
+    store(id: $id) {
+        id
+        name
+        products {
+            description
+            id
+            name
+            price
+        }
     }
-  }
 }
