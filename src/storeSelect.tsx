@@ -1,36 +1,42 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
-import * as queries from './queries.graphql';
+import React from "react";
+import { Query } from "react-apollo";
+import styled from "styled-components";
+import * as queries from "./queries.graphql";
 
 const Select = styled.select`
-  height: 32px;
-  width: 200px;
+    height: 32px;
+    width: 200px;
 `;
 
 interface Store {
-  id: string;
-  name: string;
+    id: string;
+    name: string;
 }
 
 interface StoreSelectProps {
-  value: string;
-  onChange: Function;
+    value: string;
+    onChange: Function;
 }
 
 const StoreSelect = React.memo(({ value, onChange }: StoreSelectProps) => {
-  const onChangeStore = React.useCallback((e) => {
-    e.preventDefault();
-    onChange(e.target.value);
-  }, []);
+    const onChangeStore = React.useCallback((e) => {
+        e.preventDefault();
+        onChange(e.target.value);
+    }, []);
 
-  return (
-    <div>Store select</div>
-  );
+    return (
+        <Query query={queries.getStores}>
+            {({ data: { stores = [] } = {} }) => (
+                <Select value={value} onChange={onChangeStore}>
+                    {stores.map(({ id, name }: Store) => (
+                        <option key={id} value={id}>
+                            {name}
+                        </option>
+                    ))}
+                </Select>
+            )}
+        </Query>
+    );
 });
 
 export default StoreSelect;
-
-
-
-

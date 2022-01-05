@@ -3,69 +3,69 @@
 /// <reference types="react-dom" />
 
 declare namespace NodeJS {
-  interface ProcessEnv {
-    NODE_ENV: 'development' | 'production' | 'test'
-    PUBLIC_URL: string
-  }
+    interface ProcessEnv {
+        NODE_ENV: "development" | "production" | "test";
+        PUBLIC_URL: string;
+    }
 }
 
-declare module '*.bmp' {
-  const src: string;
-  export default src;
-}
-
-declare module '*.gif' {
-  const src: string;
-  export default src;
-}
-
-declare module '*.jpg' {
-  const src: string;
-  export default src;
-}
-
-declare module '*.jpeg' {
-  const src: string;
-  export default src;
-}
-
-declare module '*.png' {
-  const src: string;
-  export default src;
-}
-
-declare module '*.webp' {
+declare module "*.bmp" {
     const src: string;
     export default src;
 }
 
-declare module '*.svg' {
-  import * as React from 'react';
-
-  export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
-
-  const src: string;
-  export default src;
+declare module "*.gif" {
+    const src: string;
+    export default src;
 }
 
-declare module '*.module.css' {
-  const classes: { [key: string]: string };
-  export default classes;
+declare module "*.jpg" {
+    const src: string;
+    export default src;
 }
 
-declare module '*.module.scss' {
-  const classes: { [key: string]: string };
-  export default classes;
+declare module "*.jpeg" {
+    const src: string;
+    export default src;
 }
 
-declare module '*.module.sass' {
-  const classes: { [key: string]: string };
-  export default classes;
+declare module "*.png" {
+    const src: string;
+    export default src;
 }
 
-declare module '*.graphql' {
-  import {DocumentNode} from 'graphql';
+declare module "*.webp" {
+    const src: string;
+    export default src;
+}
 
-  const value: DocumentNode;
-  export = value;
+declare module "*.svg" {
+    import * as React from "react";
+
+    export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
+
+    const src: string;
+    export default src;
+}
+
+declare module "*.module.css" {
+    const classes: { [key: string]: string };
+    export default classes;
+}
+
+declare module "*.module.scss" {
+    const classes: { [key: string]: string };
+    export default classes;
+}
+
+declare module "*.module.sass" {
+    const classes: { [key: string]: string };
+    export default classes;
+}
+
+declare module "*.graphql" {
+    import { DocumentNode } from "graphql";
+
+    const value: DocumentNode;
+    export = value;
 }
